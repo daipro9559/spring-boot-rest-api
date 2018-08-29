@@ -15,7 +15,7 @@ class MainController {
     @PostMapping(path = ["/add"])
     fun addUSer(@RequestBody name: String, @RequestBody email: String,@RequestBody password:String ): String {
         val user = User()
-        user.user_name = name
+        user.username = name
         user.email = email
         user.password = password
         userRepository.save(user)

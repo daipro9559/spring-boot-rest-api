@@ -8,12 +8,12 @@ import org.springframework.security.core.userdetails.UserDetails
 import java.util.*
 import java.util.stream.Collectors
 
-class UserPrincipal(val id: Long?, val name: String, private val userName: String, @field:JsonIgnore
+class UserPrincipal(val id: Long?, private val username: String, @field:JsonIgnore
 val email: String, @field:JsonIgnore
                     private val password: String, private val authorities: Collection<GrantedAuthority>) : UserDetails {
 
     override fun getUsername(): String {
-        return userName
+        return username
     }
 
     override fun getPassword(): String {
@@ -58,8 +58,7 @@ val email: String, @field:JsonIgnore
             val authorities = user.role.stream().map { role -> SimpleGrantedAuthority(role.name.name) }.collect(Collectors.toList())
             return UserPrincipal(
                     user.id,
-                    user.name,
-                    user.user_name,
+                    user.username,
                     user.email,
                     user.password,
                     authorities
